@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OTPL 中文规范 &mdash; OpenTPL 0.2.3 文档</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="OpenTPL 0.2.3 文档" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OpenTPL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">OTPL 中文规范</a><ul>
+<li><a class="reference internal" href="#id1">变量</a></li>
+<li><a class="reference internal" href="#id2">数据类型</a></li>
+<li><a class="reference internal" href="#id3">输出</a></li>
+<li><a class="reference internal" href="#id4">注释</a></li>
+<li><a class="reference internal" href="#id5">作用域</a></li>
+<li><a class="reference internal" href="#id6">运算符</a><ul>
+<li><a class="reference internal" href="#id7">操作</a></li>
+<li><a class="reference internal" href="#id8">比较</a></li>
+<li><a class="reference internal" href="#id9">逻辑运算</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">函数</a></li>
+<li><a class="reference internal" href="#id11">过滤器</a></li>
+<li><a class="reference internal" href="#id12">命令</a><ul>
+<li><a class="reference internal" href="#set">set</a></li>
+<li><a class="reference internal" href="#if">if</a></li>
+<li><a class="reference internal" href="#for">for</a></li>
+<li><a class="reference internal" href="#block">block</a></li>
+<li><a class="reference internal" href="#include">include</a></li>
+<li><a class="reference internal" href="#layout">layout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">内置函数</a><ul>
+<li><a class="reference internal" href="#range-start-end-step-range-end">range(start, end[, step])/range(end)</a></li>
+<li><a class="reference internal" href="#now">now()</a></li>
+<li><a class="reference internal" href="#int-value">int(value)</a></li>
+<li><a class="reference internal" href="#float-value">float(value)</a></li>
+<li><a class="reference internal" href="#str-value">str(value[,...])</a></li>
+<li><a class="reference internal" href="#len-value">len(value)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">内置过滤器</a><ul>
+<li><a class="reference internal" href="#time-format">time(format)</a></li>
+<li><a class="reference internal" href="#num-format">num(format)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">保留关键词</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">OpenTPL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>OTPL 中文规范</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/syntax-cn.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="otpl">
+<h1>OTPL 中文规范<a class="headerlink" href="#otpl" title="永久链接至标题">¶</a></h1>
+<p>本文档是 OTPL 语法规范的中文版本。</p>
+<p>目录:</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id1">
+<h2>变量<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>变量会从当前模板的上下文上查找值，如果你想输出一个变量的值，可以使用:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">foobar</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>这样模板引擎将会从上下文上去查找变量 <code class="docutils literal"><span class="pre">foobar</span></code> 然后打印出来。变量可以使用 <code class="docutils literal"><span class="pre">.</span></code> 来访问属性，和 <a class="reference external" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> ([1]以下等同) 一样，也可以用 <code class="docutils literal"><span class="pre">[]</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">foo</span><span class="o">.</span><span class="n">bar</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">foo</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">]</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>这两种方式的结果都是一样的。
+如果这个变量的值是 <code class="docutils literal"><span class="pre">null</span></code>，什么也不会被输出。同样的，如果引用了 <code class="docutils literal"><span class="pre">null</span></code> 的属性，也不会输出任何值（也不会报错）。
+下面的这些操作当 <code class="docutils literal"><span class="pre">foo</span> <span class="pre">==</span> <span class="pre">null</span></code> 的时候，都不会输出任何值:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">foo</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">foo</span><span class="o">.</span><span class="n">bar</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">foo</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">baz</span> <span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>数据类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>OTPL 支持的数据类型为：</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">boolean</span></code> 布尔类型。它由 <code class="docutils literal"><span class="pre">true</span></code> 和 <code class="docutils literal"><span class="pre">false</span></code> 两个固定值表示。</li>
+<li><code class="docutils literal"><span class="pre">number</span></code> 数值类型。数值类型分为整数 <code class="docutils literal"><span class="pre">integer</span></code> 和浮点数 <code class="docutils literal"><span class="pre">float</span></code> 表示。</li>
+<li><code class="docutils literal"><span class="pre">string</span></code> 字符串</li>
+<li><code class="docutils literal"><span class="pre">null</span></code> 空</li>
+<li><code class="docutils literal"><span class="pre">object</span></code> 对象</li>
+<li>Array/Map [未实现]</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">注：</span></code> 数值类型目前精度未最终确认，如JavaScript的整数和JAVA的整数的差异，将由实现引擎自主决定。
+OTPL致力于打造全平台通用所以在实现上须考虑这种差异性带来的问题。</p>
+</div>
+<div class="section" id="id3">
+<h2>输出<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>使用 <code class="docutils literal"><span class="pre">{{</span> <span class="pre">foo</span> <span class="pre">}}</span></code> 来打印 <code class="docutils literal"><span class="pre">escape</span></code> 之后的数据, <code class="docutils literal"><span class="pre">{{!</span> <span class="pre">foo</span> <span class="pre">}}}</span></code> 来输出 <code class="docutils literal"><span class="pre">unescape</span></code> 的原始数据:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>escaped: {{ foo }}
+unescaped: {{! foo }}
+</pre></div>
+</div>
+<p>使用数据 <code class="docutils literal"><span class="pre">{</span> <span class="pre">foo:</span> <span class="pre">&quot;&lt;script&gt;&quot;</span> <span class="pre">}</span></code> 渲染这个模板，将会得到下面的结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">escaped</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">script</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="n">unescaped</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>如果你希望输出最原始的数据（包括 <code class="docutils literal"><span class="pre">{{}}</span></code>），你需要使用 <code class="docutils literal"><span class="pre">{{%}}</span></code> 语法:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="o">%</span><span class="p">}}</span>
+
+<span class="p">{{</span><span class="n">x</span><span class="p">}}</span>
+
+<span class="p">{{</span><span class="o">%</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>渲染这个模板，将会得到下面的结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="n">x</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">注：</span></code> 在某些OTPL引擎实现中可能会对模板进行优化如：对空白行进行删除。
+只有在如 <code class="docutils literal"><span class="pre">{{'strings...'}}</span></code> 中的字符串是严格按模板输出的。</p>
+</div>
+<div class="section" id="id4">
+<h2>注释<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>OTPL 使用的与 <cite>C/C++</cite> 相同的注释方法。</p>
+<p><code class="docutils literal"><span class="pre">{{//</span> <span class="pre">comment</span> <span class="pre">}}</span></code> 为单个标签的注释，注意``不是`` 单行注释。</p>
+<p>多行注释:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="o">/*</span><span class="p">}}</span>
+<span class="n">comments</span>
+<span class="p">{{</span><span class="o">*/</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>注释不会有任何输出。</p>
+</div>
+<div class="section" id="id5">
+<h2>作用域<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>OTPL采用的是单次渲染一个全局作用域，子模板与父模板使用同一个上下文，但有一个特殊的作用域那就是`块`调用（参见块）。</p>
+<p>parent.otpl:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="nb">set</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="nb">set</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">}}</span>
+<span class="p">{{</span><span class="n">include</span> <span class="s2">&quot;sub.otpl&quot;</span> <span class="p">}}</span>
+<span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">a</span> <span class="p">}}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">b</span> <span class="p">}}</span>
+<span class="p">{{</span><span class="nd">@cblock</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>sub.otpl:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+<span class="p">{{</span> <span class="nb">set</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">a</span> <span class="p">}}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">b</span> <span class="p">}}</span>
+
+<span class="p">{{</span><span class="n">block</span> <span class="n">cblock</span><span class="p">}}</span>
+    <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">a</span> <span class="p">}}</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">b</span> <span class="p">}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="n">block</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>渲染 <code class="docutils literal"><span class="pre">parent.otpl</span></code>，将会得到下面的结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ow">in</span> <span class="n">sub</span><span class="p">:</span>
+<span class="n">a</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">b</span><span class="p">:</span> <span class="mi">3</span>
+<span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+<span class="n">a</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">b</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">b</span><span class="p">:</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>运算符<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>OTPL 支持在数据上使用一些操作符：</p>
+<div class="section" id="id7">
+<h3>操作<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li>加: <cite>+</cite></li>
+<li>减: <cite>-</cite></li>
+<li>乘: <cite>*</cite></li>
+<li>除: <cite>/</cite></li>
+<li>余: <cite>%</cite></li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>比较<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li>等于：<cite>==</cite></li>
+<li>不等于：<cite>!=</cite></li>
+<li>大于：<cite>&gt;</cite></li>
+<li>大于等于：<cite>&gt;=</cite></li>
+<li>小于：<cite>&lt;</cite></li>
+<li>小于等于:<cite>&lt;=</cite></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>逻辑运算<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li>或运算：<cite>||</cite></li>
+<li>与运算：<cite>&amp;&amp;</cite></li>
+<li>非运算：<cite>!</cite></li>
+<li>空值运算： <cite>??</cite> {{值达式1 ?? 值达式2}}</li>
+<li>三目运算： <cite>?:</cite> {{布尔表达式 ? 值表达式1 : 值表达式2}}</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>函数<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<p>函数的使用跟JavaScript的方法是一的简单如：<code class="docutils literal"><span class="pre">{{now()}}</span></code> ，你也可以使用变量上提供的成员方法:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>定义变量:
+
+    var x = {
+        hello:function(name){
+            return &#39;hello &#39;+name;
+        }
+    };
+
+
+模板调用：
+    {{x.hello(&#39;otpl!&#39;)}} //-&gt; hello otpl!
+</pre></div>
+</div>
+<p><cite>注：虽然OTPL支持这样的操作，但为了你的模板更加通用和效率更高，我们不推荐这样使用，应该使用一些内置方法来迭代这样的函数调用。</cite></p>
+</div>
+<div class="section" id="id11">
+<h2>过滤器<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>过滤器的使用方法是使用Unix 管道。语法： <code class="docutils literal"><span class="pre">{{foobar</span> <span class="pre">|</span> <span class="pre">filter=args}}</span></code> ,如:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="n">now</span><span class="p">()</span> <span class="o">|</span> <span class="n">time</span><span class="o">=</span><span class="s1">&#39;yyyy-MM-dd&#39;</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>输出将是一个类似 <code class="docutils literal"><span class="pre">2016-07-30</span></code> 的一个日期字符串(具体的值根据你的系统日期决定)。</p>
+<p><code class="docutils literal"><span class="pre">args</span></code> 表示参数，参数个数为大于等于0个，只有一个参数时：<code class="docutils literal"><span class="pre">=arg</span></code> ;大于1个参数需要使用括号如：<code class="docutils literal"><span class="pre">=(arg1,arg2,argN)</span></code> 而没有参数时只需要过滤器名就行了：<code class="docutils literal"><span class="pre">{{now()</span> <span class="pre">|</span> <span class="pre">time}}</span></code> 。</p>
+<p>过滤器是支持多个同时调用，如：<code class="docutils literal"><span class="pre">{{foobar</span> <span class="pre">|</span> <span class="pre">filter1=args</span> <span class="pre">|</span> <span class="pre">filter2=args</span> <span class="pre">|filterN=args}}</span></code> 。</p>
+<p>过滤器是一种特殊的函数，它也可以像其它函数一样的调用，如：<code class="docutils literal"><span class="pre">{{time(now(),'yyyy-MM-dd')}}</span></code>。</p>
+</div>
+<div class="section" id="id12">
+<h2>命令<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<p>命令是一些特殊的区块，对于这些特殊的区块，OTPL 会做特殊的处理。
+OTPL 自带了一些内置的命令，你也可以自己定义一些自己的命令。</p>
+<div class="section" id="set">
+<h3>set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
+<p>set 让你定义或者修改一个变量:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="nb">set</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">}}</span>
+<span class="p">{{</span><span class="nb">set</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">}}</span>
+<span class="p">{{</span><span class="n">x</span><span class="p">}}</span>
+<span class="p">{{</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>渲染这个模板，将会得到结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if">
+<h3>if<a class="headerlink" href="#if" title="永久链接至标题">¶</a></h3>
+<p>if 检查一个条件，让你可以选择性的输出内容，它和大多编程语言中的 <code class="docutils literal"><span class="pre">if</span></code> 语句完全一致。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="k">if</span> <span class="p">(</span><span class="n">variable</span><span class="p">)</span> <span class="p">}}</span>
+    <span class="n">It</span> <span class="ow">is</span> <span class="n">true</span>
+<span class="p">{{</span><span class="o">/</span><span class="k">if</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>如果 <code class="docutils literal"><span class="pre">variable</span></code> 定义了且值为 <code class="docutils literal"><span class="pre">true</span></code>, 将会输出 <code class="docutils literal"><span class="pre">It</span> <span class="pre">is</span> <span class="pre">true</span></code>，否则什么都不会输出。</p>
+<p>同样，可以通过 <code class="docutils literal"><span class="pre">elif</span></code> 和 <code class="docutils literal"><span class="pre">else</span></code> 增加判断中的其他条件:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>{{ if (hungry) }}
+    I am hungry
+{{ elif (tired) }}
+    I am tired
+{{ else }}
+    I am good!
+{{/if }}
+</pre></div>
+</div>
+</div>
+<div class="section" id="for">
+<h3>for<a class="headerlink" href="#for" title="永久链接至标题">¶</a></h3>
+<p>for 可以对 <code class="docutils literal"><span class="pre">array</span></code> 和 <code class="docutils literal"><span class="pre">map</span></code> 进行迭代：
+js:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="nb">set</span> <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span><span class="s1">&#39;bar&#39;</span><span class="p">]</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="nb">set</span> <span class="nb">map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span><span class="s1">&#39;bar&#39;</span><span class="p">}</span> <span class="p">}}</span>
+
+<span class="p">{{</span><span class="k">for</span> <span class="n">index</span> <span class="p">:</span> <span class="n">array</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="n">index</span><span class="p">}}</span> <span class="p">{{</span><span class="n">array</span><span class="p">[</span><span class="n">index</span><span class="p">]}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+
+<span class="p">{{</span><span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="p">:</span> <span class="nb">map</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="n">key</span><span class="p">}}</span> <span class="p">{{</span><span class="n">value</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+
+<span class="p">{{</span><span class="k">for</span> <span class="n">item</span> <span class="p">:</span> <span class="nb">map</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="n">item</span><span class="o">.</span><span class="n">key</span><span class="p">}}</span> <span class="p">{{</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+
+
+<span class="p">{{</span> <span class="k">for</span> <span class="n">i</span> <span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)}}</span>
+    <span class="p">{{</span><span class="n">i</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>渲染这个模版，将会得到结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="n">foo</span>
+<span class="mi">1</span> <span class="n">bar</span>
+
+<span class="n">foo</span> <span class="n">bar</span>
+<span class="n">foo</span> <span class="n">bar</span>
+
+<span class="mi">0</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="block">
+<h3>block<a class="headerlink" href="#block" title="永久链接至标题">¶</a></h3>
+<p>块允许你定义一个可复用的代码片段和位置预留，下面是一个例子：</p>
+<p>定义:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="n">block</span> <span class="n">test</span><span class="p">}}</span>
+    <span class="n">param</span> <span class="ow">is</span> <span class="p">{{</span><span class="n">param</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">/</span><span class="n">block</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>调用块:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="nd">@test</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="mi">2</span> <span class="p">)}}</span>
+</pre></div>
+</div>
+<p>渲染结果是:</p>
+<blockquote>
+<div>param is 2</div></blockquote>
+<p>注意: 在块中，你不能改变外层作用域上的任何变量，但是仍然可以使用它们。</p>
+</div>
+<div class="section" id="include">
+<h3>include<a class="headerlink" href="#include" title="永久链接至标题">¶</a></h3>
+<p>include 引入其他的模板。它在你想要共享不同的小的区块时非常有用。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">include</span> <span class="s2">&quot;item.html&quot;</span> <span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="layout">
+<h3>layout<a class="headerlink" href="#layout" title="永久链接至标题">¶</a></h3>
+<p>layout 你更容易的来复用模板。当编写一个模板的时候，你可以调用 <code class="docutils literal"><span class="pre">块</span></code>，这样在子模板中可以实现这些块。</p>
+<p>layout.otpl:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta name=&quot;charset&quot; content=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;{{title}}&lt;/title&gt;
+        {{@head}}
+    &lt;/head&gt;
+    &lt;body&gt;
+        {{@body}}
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+<p>item.otpl:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="n">layout</span> <span class="s1">&#39;layout.otpl&#39;</span><span class="p">}}</span>
+
+<span class="p">{{</span><span class="n">block</span> <span class="n">head</span><span class="p">}}</span>
+    <span class="o">&lt;</span><span class="n">link</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;test.css&quot;</span> <span class="n">rev</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span><span class="o">/&gt;</span>
+<span class="p">{{</span><span class="o">/</span><span class="n">block</span><span class="p">}}</span>
+
+<span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Hello</span> <span class="p">{{</span><span class="n">title</span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>然后我们使用数据 <code class="docutils literal"><span class="pre">{title:</span> <span class="pre">'OTPL'}</span></code> 渲染 <code class="docutils literal"><span class="pre">item.otpl</span></code>，将会得到下面的结果：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta name=&quot;charset&quot; content=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;OTPL&lt;/title&gt;
+        &lt;link type=&quot;text/css&quot; href=&quot;test.css&quot; rev=&quot;stylesheet&quot; rel=&quot;stylesheet&quot;/&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;Hello OTPL&lt;/h2&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>内置函数<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<div class="section" id="range-start-end-step-range-end">
+<h3>range(start, end[, step])/range(end)<a class="headerlink" href="#range-start-end-step-range-end" title="永久链接至标题">¶</a></h3>
+<p>如果需要迭代一些固定的数字，<cite>range</cite> 可以很方便的生成一个数字集合给你。这些数字从 <cite>start</cite> 开始，
+然后按照 <cite>step</cite> (默认为1) 的数量进行递增或者递减，直到数字到达了 <cite>stop`（不会包括 `stop</cite>）。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)}}{{</span><span class="n">i</span><span class="p">}}{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+<span class="p">{{</span><span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)}}{{</span><span class="n">i</span><span class="p">}}{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+<span class="p">{{</span><span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)}}{{</span><span class="n">i</span><span class="p">}}{{</span><span class="o">/</span><span class="k">for</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>渲染这个模板，将会得到结果:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">012</span>
+<span class="mi">12</span>
+<span class="mi">321</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="now">
+<h3>now()<a class="headerlink" href="#now" title="永久链接至标题">¶</a></h3>
+<p>获取当前时间戳[x]</p>
+</div>
+<div class="section" id="int-value">
+<h3>int(value)<a class="headerlink" href="#int-value" title="永久链接至标题">¶</a></h3>
+<p>将一个值转换为整数</p>
+</div>
+<div class="section" id="float-value">
+<h3>float(value)<a class="headerlink" href="#float-value" title="永久链接至标题">¶</a></h3>
+<p>将一个值转换浮点数</p>
+</div>
+<div class="section" id="str-value">
+<h3>str(value[,...])<a class="headerlink" href="#str-value" title="永久链接至标题">¶</a></h3>
+<p>将给定参数转换为字符串并连接（如果多个参数）</p>
+</div>
+<div class="section" id="len-value">
+<h3>len(value)<a class="headerlink" href="#len-value" title="永久链接至标题">¶</a></h3>
+<p>获取指定值的元素个数，如数组/MAP的长度、字符串字符数。
+如果不可用则返回 <cite>-1</cite>。</p>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>内置过滤器<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<div class="section" id="time-format">
+<h3>time(format)<a class="headerlink" href="#time-format" title="永久链接至标题">¶</a></h3>
+<p>格式化日期,格式如下：</p>
+<ul class="simple">
+<li>yyyy</li>
+<li>mm</li>
+<li>d</li>
+<li>...</li>
+</ul>
+</div>
+<div class="section" id="num-format">
+<h3>num(format)<a class="headerlink" href="#num-format" title="永久链接至标题">¶</a></h3>
+<p>格式化数字</p>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>保留关键词<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><cite>debugger</cite></li>
+<li><cite>exit</cite></li>
+<li><cite>extend</cite></li>
+<li><cite>layout</cite></li>
+<li><cite>import</cite></li>
+<li><cite>include</cite></li>
+<li><cite>block</cite></li>
+<li><cite>macro</cite></li>
+<li><cite>parse</cite></li>
+<li><cite>range</cite></li>
+<li><cite>set</cite></li>
+<li><cite>with</cite></li>
+<li><cite>void</cite></li>
+<li><cite>true</cite></li>
+<li><cite>false</cite></li>
+<li><cite>null</cite></li>
+<li><cite>each</cite></li>
+<li><cite>if</cite></li>
+<li><cite>elif</cite></li>
+<li><cite>else</cite></li>
+<li><cite>for</cite></li>
+<li><cite>in</cite></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2016, OpenTPL authors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
